@@ -8,13 +8,23 @@ struct BiList
   BiList< T >* prev;
 };
 
+// Task 0
 template< class T >
-BiList< T >* fake(BiList< T >* next)
+BiList< T >* fakeStart(BiList< T >* next)
 {
-  BiList< T >* el = static_cast< BiList< T >* >(::operator new (sizeof(BiList< T >*)));
+  BiList< T >* el = static_cast< BiList< T >* >(::operator new(sizeof(BiList< T >*)));
   el->next = next;
   next->prev = el;
-  return next;
+  return el;
+}
+
+template< class T >
+BiList< T >* fakeEnd(BiList< T >* prev)
+{
+  BiList< T >* el = static_cast< BiList< T >* >(::operator new(sizeof(BiList< T >*)));
+  el->prev = prev;
+  prev->next = el;
+  return el;
 }
 
 template< class T >
