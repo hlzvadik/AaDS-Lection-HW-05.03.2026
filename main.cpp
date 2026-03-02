@@ -44,7 +44,9 @@ BiList< T >* insert(BiList< T >* prev, const T& data); // Добавление �
 template< class T >
 BiList< T >* add(BiList< T >* next, const T& data); // Добавление перед
 template< class T >
-BiList< T >* makeBiList(const T& data); // Создание BiList
+BiList< T >* makeBiList(); // Создание пустого BiList
+template< class T >
+BiList< T >* makeBiList(const T& data); // Создание BiList на основе элемента
 template< class T >
 BiList< T >* cut(BiList< T >* el); // Удаление элемента после
 template< class T >
@@ -74,6 +76,18 @@ BiList< T >* add(BiList< T >* next, const T& data)
   el->prev->next = el;
   el->next->prev = el;
   return el;
+}
+
+template< class T >
+BiList< T >* makeBiList()
+{
+  BiList< T >* el = new BiList< T >;
+  BiList< T >* rt = fakeStart(el);
+  fakeEnd(el);
+  el->prev->next = el->next;
+  el->next->prev = el->prev;
+  delete el;
+  return rt;
 }
 
 template< class T >
@@ -120,6 +134,28 @@ int main()
   {
     add(fE, a[i]);
   }
+  while (aBL != fE)
+  {
+    std::cout << aBL->val << '\n';
+    aBL = aBL->next;
+  }
+  std::cout << '\n';
   clear(fS, fE);
+  //
+  int b[5] = {1, 5, 6, 7, 8};
+  size_t len_b = 5;
+  BiList< int >* bfS = makeBiList< int >();
+  BiList< int >* bfE = bfS->next;
+  for (size_t i = 0; i < len_b; ++i)
+  {
+    add(bfE, b[i]);
+  }
+  BiList< int >* now = bfS->next;
+  while (now != bfE)
+  {
+    std::cout << now->val << '\n';
+    now = now->next;
+  }
+  clear(bfS, bfE);
   //
 }
