@@ -34,6 +34,10 @@ void rmfake(BiList< T >* fake) noexcept
 }
 //
 
+// Task 1
+/*Неявный интерфейс: class T должен иметь оператор копирующего присваивания, деструктор*/
+//
+
 // Task 2
 template< class T >
 BiList< T >* insert(BiList< T >* prev, const T& data); // Добавление после
