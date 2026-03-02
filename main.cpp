@@ -36,5 +36,17 @@ BiList< T >* rmfake(BiList< T >* fake) noexcept
   return ret;
 }
 
+// Task 1
+template< class T >
+BiList< T >* insert(BiList< T >* prev, const T& data); // Добавление после
+template< class T >
+BiList< T >* add(BiList< T >* next, const T& data); // Добавление перед
+template< class T >
+BiList< T >* makeBiList(const T& data); // Создание BiList
+template< class T >
+BiList< T >* cut(BiList< T >* el); // Удаление элемента
+template< class T >
+void clear(BiList< T >* fakeStart, BiList< T >* fakeEnd); // Удаление всего списка
+
 int main()
 {}
