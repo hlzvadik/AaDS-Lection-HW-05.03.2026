@@ -28,13 +28,11 @@ BiList< T >* fakeEnd(BiList< T >* prev)
 }
 
 template< class T >
-BiList< T >* rmfake(BiList< T >* fake) noexcept
+void rmfake(BiList< T >* fake) noexcept
 {
-  BiList< T >* ret = fake->next;
-  ret->prev = nullptr;
   ::operator delete(fake);
-  return ret;
 }
+//
 
 // Task 1
 template< class T >
@@ -44,9 +42,68 @@ BiList< T >* add(BiList< T >* next, const T& data); // Добавление пе
 template< class T >
 BiList< T >* makeBiList(const T& data); // Создание BiList
 template< class T >
-BiList< T >* cut(BiList< T >* el); // Удаление элемента
+BiList< T >* cut(BiList< T >* el); // Удаление элемента после
 template< class T >
 void clear(BiList< T >* fakeStart, BiList< T >* fakeEnd); // Удаление всего списка
+//
+
+// Task 2
+template< class T >
+BiList< T >* insert(BiList< T >* prev, const T& data)
+{
+  BiList< T >* el = new BiList< T >;
+  el->val = data;
+  el->prev = prev;
+  el->next = prev->next;
+  el->prev->next = el;
+  el->next->prev = el;
+  return el;
+}
+
+template< class T >
+BiList< T >* add(BiList< T >* next, const T& data)
+{
+  BiList< T >* el = new BiList< T >;
+  el->val = data;
+  el->next = next;
+  el->prev = next->prev;
+  el->prev->next = el;
+  el->next->prev = el;
+  return el;
+}
+
+template< class T >
+BiList< T >* makeBiList(const T& data)
+{
+  BiList< T >*el = new BiList< T >;
+  el->val = data;
+  fakeStart(el);
+  fakeEnd(el);
+  return el;
+}
+
+template< class T >
+BiList< T >* cut(BiList< T >* el)
+{
+  BiList< T >* r = el->next;
+  el->next = el->next->next;
+  el->next->prev = el;
+  delete r;
+  return el;
+}
+
+template< class T >
+void clear(BiList< T >* fakeStart, BiList< T >* fakeEnd)
+{
+  while(fakeStart->next != fakeEnd)
+  {
+    cut(fakeStart);
+  }
+  rmfake(fakeStart);
+  rmfake(fakeEnd);
+}
+//
 
 int main()
 {}
+
