@@ -34,7 +34,7 @@ void rmfake(BiList< T >* fake) noexcept
 }
 //
 
-// Task 1
+// Task 2
 template< class T >
 BiList< T >* insert(BiList< T >* prev, const T& data); // Добавление после
 template< class T >
@@ -47,7 +47,7 @@ template< class T >
 void clear(BiList< T >* fakeStart, BiList< T >* fakeEnd); // Удаление всего списка
 //
 
-// Task 2
+// Task 3
 template< class T >
 BiList< T >* insert(BiList< T >* prev, const T& data)
 {
@@ -105,5 +105,17 @@ void clear(BiList< T >* fakeStart, BiList< T >* fakeEnd)
 //
 
 int main()
-{}
-
+{
+  // Task 4
+  int a[2] = {1, 2};
+  size_t len_a = 2;
+  BiList< int >* aBL = makeBiList(a[0]);
+  BiList< int >* fS = aBL->prev;
+  BiList< int >* fE = aBL->next;
+  for (size_t i = 1; i < len_a; ++i)
+  {
+    add(fE, a[i]);
+  }
+  clear(fS, fE);
+  //
+}
